@@ -1,0 +1,40 @@
+{% comment %}
+  STASHBOX SEO/AIO SCHEMA PHASE 1
+  CollectionPage and ItemList JSON-LD for collection pages only.
+  This snippet intentionally does not emit Product, Offer, AggregateRating, or Review schema.
+{% endcomment %}
+{%- if request.page_type == 'collection' and collection -%}
+  {%- assign stashbox_collection_url = shop.url | append: collection.url -%}
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": {{ stashbox_collection_url | append: '#collectionpage' | json }},
+      "url": {{ stashbox_collection_url | json }},
+      "name": {{ collection.title | strip_html | json }}{%- if collection.description != blank -%},
+      "description": {{ collection.description | strip_html | strip | json }}{%- endif -%}
+    }{%- if collection.products.size > 0 -%},
+    {
+      "@type": "ItemList",
+      "@id": {{ stashbox_collection_url | append: '#itemlist' | json }},
+      "url": {{ stashbox_collection_url | json }},
+      "name": {{ collection.title | strip_html | append: ' products' | json }},
+      "itemListElement": [
+        {%- for stashbox_product in collection.products -%}
+          {%- assign stashbox_product_url = shop.url | append: stashbox_product.url -%}
+          {
+            "@type": "ListItem",
+            "position": {{ forloop.index }},
+            "url": {{ stashbox_product_url | json }},
+            "name": {{ stashbox_product.title | strip_html | json }}{%- if stashbox_product.featured_image -%},
+            "image": {{ stashbox_product.featured_image | image_url: width: 1200 | prepend: 'https:' | json }}{%- endif -%}
+          }{%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+      ]
+    }{%- endif -%}
+  ]
+}
+  </script>
+{%- endif -%}

@@ -1,0 +1,88 @@
+{% comment %}
+  STASHBOX SEO/AIO SCHEMA PHASE 1
+  BreadcrumbList JSON-LD only. This snippet does not render visible breadcrumbs.
+{% endcomment %}
+{%- liquid
+  assign stashbox_schema_items = ''
+  assign stashbox_position = 1
+  assign stashbox_home_url = shop.url
+  assign stashbox_home_name = 'general.breadcrumbs.home' | t | default: 'Home'
+-%}
+
+{%- capture stashbox_schema_items -%}
+  {
+    "@type": "ListItem",
+    "position": {{ stashbox_position }},
+    "name": {{ stashbox_home_name | json }},
+    "item": {{ stashbox_home_url | json }}
+  }
+{%- endcapture -%}
+
+{%- liquid
+  assign stashbox_position = stashbox_position | plus: 1
+  assign stashbox_current_name = blank
+  assign stashbox_current_url = blank
+-%}
+
+{%- case request.page_type -%}
+  {%- when 'product' -%}
+    {%- if collection and collection.url != blank -%}
+      {%- capture stashbox_collection_item -%}
+,
+  {
+    "@type": "ListItem",
+    "position": {{ stashbox_position }},
+    "name": {{ collection.title | strip_html | json }},
+    "item": {{ shop.url | append: collection.url | json }}
+  }
+      {%- endcapture -%}
+      {%- assign stashbox_schema_items = stashbox_schema_items | append: stashbox_collection_item -%}
+      {%- assign stashbox_position = stashbox_position | plus: 1 -%}
+    {%- endif -%}
+    {%- assign stashbox_current_name = product.title -%}
+    {%- assign stashbox_current_url = product.url -%}
+  {%- when 'collection' -%}
+    {%- assign stashbox_current_name = collection.title -%}
+    {%- assign stashbox_current_url = collection.url -%}
+  {%- when 'article' -%}
+    {%- if blog and blog.url != blank -%}
+      {%- capture stashbox_blog_item -%}
+,
+  {
+    "@type": "ListItem",
+    "position": {{ stashbox_position }},
+    "name": {{ blog.title | strip_html | json }},
+    "item": {{ shop.url | append: blog.url | json }}
+  }
+      {%- endcapture -%}
+      {%- assign stashbox_schema_items = stashbox_schema_items | append: stashbox_blog_item -%}
+      {%- assign stashbox_position = stashbox_position | plus: 1 -%}
+    {%- endif -%}
+    {%- assign stashbox_current_name = article.title -%}
+    {%- assign stashbox_current_url = article.url -%}
+  {%- when 'page' -%}
+    {%- assign stashbox_current_name = page.title -%}
+    {%- assign stashbox_current_url = page.url -%}
+{%- endcase -%}
+
+{%- if stashbox_current_name != blank and stashbox_current_url != blank -%}
+  {%- capture stashbox_current_item -%}
+,
+  {
+    "@type": "ListItem",
+    "position": {{ stashbox_position }},
+    "name": {{ stashbox_current_name | strip_html | json }},
+    "item": {{ shop.url | append: stashbox_current_url | json }}
+  }
+  {%- endcapture -%}
+  {%- assign stashbox_schema_items = stashbox_schema_items | append: stashbox_current_item -%}
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+{{ stashbox_schema_items }}
+  ]
+}
+  </script>
+{%- endif -%}
