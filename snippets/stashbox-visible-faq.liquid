@@ -13,101 +13,57 @@
 {%- liquid
   assign stashbox_faq_source = source
   assign stashbox_has_visible_faq = false
+
+  assign faq_1_question = blank
+  assign faq_1_answer = blank
+  assign faq_1_answer_metafield = blank
+  assign faq_2_question = blank
+  assign faq_2_answer = blank
+  assign faq_2_answer_metafield = blank
+  assign faq_3_question = blank
+  assign faq_3_answer = blank
+  assign faq_3_answer_metafield = blank
+  assign faq_4_question = blank
+  assign faq_4_answer = blank
+  assign faq_4_answer_metafield = blank
+  assign faq_5_question = blank
+  assign faq_5_answer = blank
+  assign faq_5_answer_metafield = blank
+
+  if stashbox_faq_source != blank
+    assign faq_1_question = stashbox_faq_source.metafields.custom.faq_1_question.value | strip_html | strip
+    assign faq_1_answer = stashbox_faq_source.metafields.custom.faq_1_answer.value | metafield_text | strip_html | strip
+    assign faq_1_answer_metafield = stashbox_faq_source.metafields.custom.faq_1_answer
+
+    assign faq_2_question = stashbox_faq_source.metafields.custom.faq_2_question.value | strip_html | strip
+    assign faq_2_answer = stashbox_faq_source.metafields.custom.faq_2_answer.value | metafield_text | strip_html | strip
+    assign faq_2_answer_metafield = stashbox_faq_source.metafields.custom.faq_2_answer
+
+    assign faq_3_question = stashbox_faq_source.metafields.custom.faq_3_question.value | strip_html | strip
+    assign faq_3_answer = stashbox_faq_source.metafields.custom.faq_3_answer.value | metafield_text | strip_html | strip
+    assign faq_3_answer_metafield = stashbox_faq_source.metafields.custom.faq_3_answer
+
+    assign faq_4_question = stashbox_faq_source.metafields.custom.faq_4_question.value | strip_html | strip
+    assign faq_4_answer = stashbox_faq_source.metafields.custom.faq_4_answer.value | metafield_text | strip_html | strip
+    assign faq_4_answer_metafield = stashbox_faq_source.metafields.custom.faq_4_answer
+
+    assign faq_5_question = stashbox_faq_source.metafields.custom.faq_5_question.value | strip_html | strip
+    assign faq_5_answer = stashbox_faq_source.metafields.custom.faq_5_answer.value | metafield_text | strip_html | strip
+    assign faq_5_answer_metafield = stashbox_faq_source.metafields.custom.faq_5_answer
+  endif
+
+  if faq_1_question != blank and faq_1_answer != blank
+    assign stashbox_has_visible_faq = true
+  elsif faq_2_question != blank and faq_2_answer != blank
+    assign stashbox_has_visible_faq = true
+  elsif faq_3_question != blank and faq_3_answer != blank
+    assign stashbox_has_visible_faq = true
+  elsif faq_4_question != blank and faq_4_answer != blank
+    assign stashbox_has_visible_faq = true
+  elsif faq_5_question != blank and faq_5_answer != blank
+    assign stashbox_has_visible_faq = true
+  endif
 -%}
-
-{%- capture stashbox_visible_faq_items -%}
-  {%- if stashbox_faq_source != blank -%}
-    {%- liquid
-      assign stashbox_question = stashbox_faq_source.metafields.custom.faq_1_question
-      assign stashbox_answer = stashbox_faq_source.metafields.custom.faq_1_answer
-      assign stashbox_question_text = stashbox_question | metafield_text | strip_html | strip
-      assign stashbox_answer_text = stashbox_answer | metafield_text | strip_html | strip
-    -%}
-    {%- if stashbox_question_text != blank and stashbox_answer_text != blank -%}
-      {%- assign stashbox_has_visible_faq = true -%}
-      <details class="stashbox-visible-faq__item">
-        <summary class="stashbox-visible-faq__summary">
-          {{ stashbox_question_text | escape }}
-        </summary>
-        <div class="stashbox-visible-faq__answer rte">
-          {{ stashbox_answer | metafield_tag }}
-        </div>
-      </details>
-    {%- endif -%}
-
-    {%- liquid
-      assign stashbox_question = stashbox_faq_source.metafields.custom.faq_2_question
-      assign stashbox_answer = stashbox_faq_source.metafields.custom.faq_2_answer
-      assign stashbox_question_text = stashbox_question | metafield_text | strip_html | strip
-      assign stashbox_answer_text = stashbox_answer | metafield_text | strip_html | strip
-    -%}
-    {%- if stashbox_question_text != blank and stashbox_answer_text != blank -%}
-      {%- assign stashbox_has_visible_faq = true -%}
-      <details class="stashbox-visible-faq__item">
-        <summary class="stashbox-visible-faq__summary">
-          {{ stashbox_question_text | escape }}
-        </summary>
-        <div class="stashbox-visible-faq__answer rte">
-          {{ stashbox_answer | metafield_tag }}
-        </div>
-      </details>
-    {%- endif -%}
-
-    {%- liquid
-      assign stashbox_question = stashbox_faq_source.metafields.custom.faq_3_question
-      assign stashbox_answer = stashbox_faq_source.metafields.custom.faq_3_answer
-      assign stashbox_question_text = stashbox_question | metafield_text | strip_html | strip
-      assign stashbox_answer_text = stashbox_answer | metafield_text | strip_html | strip
-    -%}
-    {%- if stashbox_question_text != blank and stashbox_answer_text != blank -%}
-      {%- assign stashbox_has_visible_faq = true -%}
-      <details class="stashbox-visible-faq__item">
-        <summary class="stashbox-visible-faq__summary">
-          {{ stashbox_question_text | escape }}
-        </summary>
-        <div class="stashbox-visible-faq__answer rte">
-          {{ stashbox_answer | metafield_tag }}
-        </div>
-      </details>
-    {%- endif -%}
-
-    {%- liquid
-      assign stashbox_question = stashbox_faq_source.metafields.custom.faq_4_question
-      assign stashbox_answer = stashbox_faq_source.metafields.custom.faq_4_answer
-      assign stashbox_question_text = stashbox_question | metafield_text | strip_html | strip
-      assign stashbox_answer_text = stashbox_answer | metafield_text | strip_html | strip
-    -%}
-    {%- if stashbox_question_text != blank and stashbox_answer_text != blank -%}
-      {%- assign stashbox_has_visible_faq = true -%}
-      <details class="stashbox-visible-faq__item">
-        <summary class="stashbox-visible-faq__summary">
-          {{ stashbox_question_text | escape }}
-        </summary>
-        <div class="stashbox-visible-faq__answer rte">
-          {{ stashbox_answer | metafield_tag }}
-        </div>
-      </details>
-    {%- endif -%}
-
-    {%- liquid
-      assign stashbox_question = stashbox_faq_source.metafields.custom.faq_5_question
-      assign stashbox_answer = stashbox_faq_source.metafields.custom.faq_5_answer
-      assign stashbox_question_text = stashbox_question | metafield_text | strip_html | strip
-      assign stashbox_answer_text = stashbox_answer | metafield_text | strip_html | strip
-    -%}
-    {%- if stashbox_question_text != blank and stashbox_answer_text != blank -%}
-      {%- assign stashbox_has_visible_faq = true -%}
-      <details class="stashbox-visible-faq__item">
-        <summary class="stashbox-visible-faq__summary">
-          {{ stashbox_question_text | escape }}
-        </summary>
-        <div class="stashbox-visible-faq__answer rte">
-          {{ stashbox_answer | metafield_tag }}
-        </div>
-      </details>
-    {%- endif -%}
-  {%- endif -%}
-{%- endcapture -%}
 
 {%- if stashbox_has_visible_faq -%}
   <section class="stashbox-visible-faq page-width" aria-labelledby="stashbox-visible-faq-heading">
@@ -146,7 +102,60 @@
     </h2>
 
     <div class="stashbox-visible-faq__items">
-      {{ stashbox_visible_faq_items }}
+      {%- if faq_1_question != blank and faq_1_answer != blank -%}
+        <details class="stashbox-visible-faq__item" data-stashbox-faq-item="1">
+          <summary class="stashbox-visible-faq__summary">
+            {{ faq_1_question | escape }}
+          </summary>
+          <div class="stashbox-visible-faq__answer rte">
+            {{ faq_1_answer_metafield | metafield_tag }}
+          </div>
+        </details>
+      {%- endif -%}
+
+      {%- if faq_2_question != blank and faq_2_answer != blank -%}
+        <details class="stashbox-visible-faq__item" data-stashbox-faq-item="2">
+          <summary class="stashbox-visible-faq__summary">
+            {{ faq_2_question | escape }}
+          </summary>
+          <div class="stashbox-visible-faq__answer rte">
+            {{ faq_2_answer_metafield | metafield_tag }}
+          </div>
+        </details>
+      {%- endif -%}
+
+      {%- if faq_3_question != blank and faq_3_answer != blank -%}
+        <details class="stashbox-visible-faq__item" data-stashbox-faq-item="3">
+          <summary class="stashbox-visible-faq__summary">
+            {{ faq_3_question | escape }}
+          </summary>
+          <div class="stashbox-visible-faq__answer rte">
+            {{ faq_3_answer_metafield | metafield_tag }}
+          </div>
+        </details>
+      {%- endif -%}
+
+      {%- if faq_4_question != blank and faq_4_answer != blank -%}
+        <details class="stashbox-visible-faq__item" data-stashbox-faq-item="4">
+          <summary class="stashbox-visible-faq__summary">
+            {{ faq_4_question | escape }}
+          </summary>
+          <div class="stashbox-visible-faq__answer rte">
+            {{ faq_4_answer_metafield | metafield_tag }}
+          </div>
+        </details>
+      {%- endif -%}
+
+      {%- if faq_5_question != blank and faq_5_answer != blank -%}
+        <details class="stashbox-visible-faq__item" data-stashbox-faq-item="5">
+          <summary class="stashbox-visible-faq__summary">
+            {{ faq_5_question | escape }}
+          </summary>
+          <div class="stashbox-visible-faq__answer rte">
+            {{ faq_5_answer_metafield | metafield_tag }}
+          </div>
+        </details>
+      {%- endif -%}
     </div>
   </section>
 {%- endif -%}
