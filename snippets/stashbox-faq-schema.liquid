@@ -15,108 +15,111 @@
   elsif request.page_type == 'collection' and collection
     assign stashbox_faq_source = collection
   endif
+
+  assign faq_1_question = blank
+  assign faq_1_answer = blank
+  assign faq_2_question = blank
+  assign faq_2_answer = blank
+  assign faq_3_question = blank
+  assign faq_3_answer = blank
+  assign faq_4_question = blank
+  assign faq_4_answer = blank
+  assign faq_5_question = blank
+  assign faq_5_answer = blank
+
+  if stashbox_faq_source != blank
+    assign faq_1_question = stashbox_faq_source.metafields.custom.faq_1_question.value | strip_html | strip
+    assign faq_1_answer = stashbox_faq_source.metafields.custom.faq_1_answer.value | metafield_text | strip_html | strip
+
+    assign faq_2_question = stashbox_faq_source.metafields.custom.faq_2_question.value | strip_html | strip
+    assign faq_2_answer = stashbox_faq_source.metafields.custom.faq_2_answer.value | metafield_text | strip_html | strip
+
+    assign faq_3_question = stashbox_faq_source.metafields.custom.faq_3_question.value | strip_html | strip
+    assign faq_3_answer = stashbox_faq_source.metafields.custom.faq_3_answer.value | metafield_text | strip_html | strip
+
+    assign faq_4_question = stashbox_faq_source.metafields.custom.faq_4_question.value | strip_html | strip
+    assign faq_4_answer = stashbox_faq_source.metafields.custom.faq_4_answer.value | metafield_text | strip_html | strip
+
+    assign faq_5_question = stashbox_faq_source.metafields.custom.faq_5_question.value | strip_html | strip
+    assign faq_5_answer = stashbox_faq_source.metafields.custom.faq_5_answer.value | metafield_text | strip_html | strip
+  endif
+
+  if faq_1_question != blank and faq_1_answer != blank
+    assign stashbox_has_faq = true
+  elsif faq_2_question != blank and faq_2_answer != blank
+    assign stashbox_has_faq = true
+  elsif faq_3_question != blank and faq_3_answer != blank
+    assign stashbox_has_faq = true
+  elsif faq_4_question != blank and faq_4_answer != blank
+    assign stashbox_has_faq = true
+  elsif faq_5_question != blank and faq_5_answer != blank
+    assign stashbox_has_faq = true
+  endif
 -%}
 
-{%- if stashbox_faq_source != blank -%}
+{%- if stashbox_has_faq -%}
   {%- capture stashbox_faq_entities -%}
-    {%- liquid
-      assign stashbox_question = stashbox_faq_source.metafields.custom.faq_1_question
-      assign stashbox_answer = stashbox_faq_source.metafields.custom.faq_1_answer
-      assign stashbox_question_text = stashbox_question | metafield_text | strip_html | strip
-      assign stashbox_answer_text = stashbox_answer | metafield_text | strip_html | strip
-    -%}
-    {%- if stashbox_question_text != blank and stashbox_answer_text != blank -%}
-      {%- if stashbox_has_faq -%},{%- endif -%}
+    {%- if faq_1_question != blank and faq_1_answer != blank -%}
       {
         "@type": "Question",
-        "name": {{ stashbox_question_text | json }},
+        "name": {{ faq_1_question | json }},
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": {{ stashbox_answer_text | json }}
+          "text": {{ faq_1_answer | json }}
         }
       }
-      {%- assign stashbox_has_faq = true -%}
     {%- endif -%}
 
-    {%- liquid
-      assign stashbox_question = stashbox_faq_source.metafields.custom.faq_2_question
-      assign stashbox_answer = stashbox_faq_source.metafields.custom.faq_2_answer
-      assign stashbox_question_text = stashbox_question | metafield_text | strip_html | strip
-      assign stashbox_answer_text = stashbox_answer | metafield_text | strip_html | strip
-    -%}
-    {%- if stashbox_question_text != blank and stashbox_answer_text != blank -%}
-      {%- if stashbox_has_faq -%},{%- endif -%}
+    {%- if faq_2_question != blank and faq_2_answer != blank -%}
+      {%- if faq_1_question != blank and faq_1_answer != blank -%},{%- endif -%}
       {
         "@type": "Question",
-        "name": {{ stashbox_question_text | json }},
+        "name": {{ faq_2_question | json }},
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": {{ stashbox_answer_text | json }}
+          "text": {{ faq_2_answer | json }}
         }
       }
-      {%- assign stashbox_has_faq = true -%}
     {%- endif -%}
 
-    {%- liquid
-      assign stashbox_question = stashbox_faq_source.metafields.custom.faq_3_question
-      assign stashbox_answer = stashbox_faq_source.metafields.custom.faq_3_answer
-      assign stashbox_question_text = stashbox_question | metafield_text | strip_html | strip
-      assign stashbox_answer_text = stashbox_answer | metafield_text | strip_html | strip
-    -%}
-    {%- if stashbox_question_text != blank and stashbox_answer_text != blank -%}
-      {%- if stashbox_has_faq -%},{%- endif -%}
+    {%- if faq_3_question != blank and faq_3_answer != blank -%}
+      {%- if faq_1_question != blank and faq_1_answer != blank or faq_2_question != blank and faq_2_answer != blank -%},{%- endif -%}
       {
         "@type": "Question",
-        "name": {{ stashbox_question_text | json }},
+        "name": {{ faq_3_question | json }},
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": {{ stashbox_answer_text | json }}
+          "text": {{ faq_3_answer | json }}
         }
       }
-      {%- assign stashbox_has_faq = true -%}
     {%- endif -%}
 
-    {%- liquid
-      assign stashbox_question = stashbox_faq_source.metafields.custom.faq_4_question
-      assign stashbox_answer = stashbox_faq_source.metafields.custom.faq_4_answer
-      assign stashbox_question_text = stashbox_question | metafield_text | strip_html | strip
-      assign stashbox_answer_text = stashbox_answer | metafield_text | strip_html | strip
-    -%}
-    {%- if stashbox_question_text != blank and stashbox_answer_text != blank -%}
-      {%- if stashbox_has_faq -%},{%- endif -%}
+    {%- if faq_4_question != blank and faq_4_answer != blank -%}
+      {%- if faq_1_question != blank and faq_1_answer != blank or faq_2_question != blank and faq_2_answer != blank or faq_3_question != blank and faq_3_answer != blank -%},{%- endif -%}
       {
         "@type": "Question",
-        "name": {{ stashbox_question_text | json }},
+        "name": {{ faq_4_question | json }},
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": {{ stashbox_answer_text | json }}
+          "text": {{ faq_4_answer | json }}
         }
       }
-      {%- assign stashbox_has_faq = true -%}
     {%- endif -%}
 
-    {%- liquid
-      assign stashbox_question = stashbox_faq_source.metafields.custom.faq_5_question
-      assign stashbox_answer = stashbox_faq_source.metafields.custom.faq_5_answer
-      assign stashbox_question_text = stashbox_question | metafield_text | strip_html | strip
-      assign stashbox_answer_text = stashbox_answer | metafield_text | strip_html | strip
-    -%}
-    {%- if stashbox_question_text != blank and stashbox_answer_text != blank -%}
-      {%- if stashbox_has_faq -%},{%- endif -%}
+    {%- if faq_5_question != blank and faq_5_answer != blank -%}
+      {%- if faq_1_question != blank and faq_1_answer != blank or faq_2_question != blank and faq_2_answer != blank or faq_3_question != blank and faq_3_answer != blank or faq_4_question != blank and faq_4_answer != blank -%},{%- endif -%}
       {
         "@type": "Question",
-        "name": {{ stashbox_question_text | json }},
+        "name": {{ faq_5_question | json }},
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": {{ stashbox_answer_text | json }}
+          "text": {{ faq_5_answer | json }}
         }
       }
-      {%- assign stashbox_has_faq = true -%}
     {%- endif -%}
   {%- endcapture -%}
 
-  {%- if stashbox_has_faq -%}
-    <script type="application/ld+json">
+  <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -124,6 +127,5 @@
 {{ stashbox_faq_entities }}
   ]
 }
-    </script>
-  {%- endif -%}
+  </script>
 {%- endif -%}
