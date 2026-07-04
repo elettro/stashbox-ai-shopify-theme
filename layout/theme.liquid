@@ -50,6 +50,11 @@
 
     {% render 'meta-tags' %}
 
+    {% comment %} STASHBOX SEO/AIO SCHEMA PHASE 1 {% endcomment %}
+    {% render 'stashbox-breadcrumb-schema' %}
+    {% render 'stashbox-collection-schema' %}
+    {% render 'stashbox-faq-schema' %}
+
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>

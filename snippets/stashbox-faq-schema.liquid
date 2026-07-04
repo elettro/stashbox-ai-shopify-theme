@@ -1,0 +1,59 @@
+{% comment %}
+  STASHBOX SEO/AIO SCHEMA PHASE 1
+
+  FAQPage JSON-LD support is intentionally gated to visible FAQ content only.
+  This theme does not currently provide a global visible FAQ block for the supported
+  custom.faq_#_question/custom.faq_#_answer metafields, so this layout-level render
+  does not output hidden FAQ schema by default.
+
+  When a visible FAQ section is added, set `stashbox_visible_faq_source` to page,
+  collection, or product in that visible FAQ section before rendering this snippet,
+  or render this snippet from that section with the source object passed in. The
+  supported metafield keys are custom.faq_1_question through custom.faq_5_answer.
+{% endcomment %}
+{%- liquid
+  assign stashbox_faq_source = blank
+
+  if stashbox_visible_faq_source == 'page' and page
+    assign stashbox_faq_source = page
+  elsif stashbox_visible_faq_source == 'collection' and collection
+    assign stashbox_faq_source = collection
+  elsif stashbox_visible_faq_source == 'product' and product
+    assign stashbox_faq_source = product
+  endif
+-%}
+
+{%- if stashbox_faq_source != blank -%}
+  {%- capture stashbox_faq_entities -%}
+    {%- for stashbox_index in (1..5) -%}
+      {%- assign stashbox_question_key = 'faq_' | append: stashbox_index | append: '_question' -%}
+      {%- assign stashbox_answer_key = 'faq_' | append: stashbox_index | append: '_answer' -%}
+      {%- assign stashbox_question = stashbox_faq_source.metafields.custom[stashbox_question_key] -%}
+      {%- assign stashbox_answer = stashbox_faq_source.metafields.custom[stashbox_answer_key] -%}
+      {%- if stashbox_question != blank and stashbox_answer != blank -%}
+        {%- unless stashbox_has_faq == blank -%},{%- endunless -%}
+        {
+          "@type": "Question",
+          "name": {{ stashbox_question | metafield_text | strip_html | strip | json }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ stashbox_answer | metafield_text | strip_html | strip | json }}
+          }
+        }
+        {%- assign stashbox_has_faq = true -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  {%- if stashbox_has_faq -%}
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+{{ stashbox_faq_entities }}
+  ]
+}
+    </script>
+  {%- endif -%}
+{%- endif -%}
