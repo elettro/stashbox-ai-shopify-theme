@@ -189,6 +189,9 @@
       </div>
     </div>
   {%- endpaginate -%}
+
+  {% render 'stashbox-visible-faq', source: collection %}
+
   {% if section.settings.image_shape == 'arch' %}
     {% render 'mask-arch' %}
   {%- endif -%}

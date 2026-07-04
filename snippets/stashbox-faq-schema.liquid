@@ -1,25 +1,19 @@
 {% comment %}
   STASHBOX SEO/AIO SCHEMA PHASE 1
 
-  FAQPage JSON-LD support is intentionally gated to visible FAQ content only.
-  This theme does not currently provide a global visible FAQ block for the supported
-  custom.faq_#_question/custom.faq_#_answer metafields, so this layout-level render
-  does not output hidden FAQ schema by default.
-
-  When a visible FAQ section is added, set `stashbox_visible_faq_source` to page,
-  collection, or product in that visible FAQ section before rendering this snippet,
-  or render this snippet from that section with the source object passed in. The
-  supported metafield keys are custom.faq_1_question through custom.faq_5_answer.
+  FAQPage JSON-LD support is intentionally gated to pages that render the
+  visible FAQ block from the same custom.faq_#_question/custom.faq_#_answer
+  metafields. The supported metafield keys are custom.faq_1_question through
+  custom.faq_5_answer.
 {% endcomment %}
 {%- liquid
   assign stashbox_faq_source = blank
+  assign stashbox_has_faq = false
 
-  if stashbox_visible_faq_source == 'page' and page
-    assign stashbox_faq_source = page
-  elsif stashbox_visible_faq_source == 'collection' and collection
-    assign stashbox_faq_source = collection
-  elsif stashbox_visible_faq_source == 'product' and product
+  if request.page_type == 'product' and product
     assign stashbox_faq_source = product
+  elsif request.page_type == 'collection' and collection
+    assign stashbox_faq_source = collection
   endif
 -%}
 
@@ -31,7 +25,7 @@
       {%- assign stashbox_question = stashbox_faq_source.metafields.custom[stashbox_question_key] -%}
       {%- assign stashbox_answer = stashbox_faq_source.metafields.custom[stashbox_answer_key] -%}
       {%- if stashbox_question != blank and stashbox_answer != blank -%}
-        {%- unless stashbox_has_faq == blank -%},{%- endunless -%}
+        {%- if stashbox_has_faq -%},{%- endif -%}
         {
           "@type": "Question",
           "name": {{ stashbox_question | metafield_text | strip_html | strip | json }},
