@@ -448,6 +448,8 @@
     {%- endif -%}
   </div>
 
+  {% render 'stashbox-visible-faq', source: product %}
+
   {% render 'product-media-modal' variant_images: variant_images %}
 
   {% assign popups = section.blocks | where: 'type', 'popup' %}
