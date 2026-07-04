@@ -24,14 +24,16 @@
       {%- assign stashbox_answer_key = 'faq_' | append: stashbox_index | append: '_answer' -%}
       {%- assign stashbox_question = stashbox_faq_source.metafields.custom[stashbox_question_key] -%}
       {%- assign stashbox_answer = stashbox_faq_source.metafields.custom[stashbox_answer_key] -%}
-      {%- if stashbox_question != blank and stashbox_answer != blank -%}
+      {%- assign stashbox_question_text = stashbox_question | metafield_text | strip_html | strip -%}
+      {%- assign stashbox_answer_text = stashbox_answer | metafield_text | strip_html | strip -%}
+      {%- if stashbox_question_text != blank and stashbox_answer_text != blank -%}
         {%- if stashbox_has_faq -%},{%- endif -%}
         {
           "@type": "Question",
-          "name": {{ stashbox_question | metafield_text | strip_html | strip | json }},
+          "name": {{ stashbox_question_text | json }},
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": {{ stashbox_answer | metafield_text | strip_html | strip | json }}
+            "text": {{ stashbox_answer_text | json }}
           }
         }
         {%- assign stashbox_has_faq = true -%}
