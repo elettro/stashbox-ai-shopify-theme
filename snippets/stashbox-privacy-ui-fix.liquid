@@ -1,0 +1,39 @@
+{%- comment -%}
+  Keeps Shopify/app-injected privacy consent controls reachable on small viewports.
+  This only targets known Shopify Customer Privacy banner/preferences selectors.
+{%- endcomment -%}
+<style>
+  #shopify-pc__banner,
+  #shopify-pc__prefs {
+    z-index: 2147483647;
+  }
+
+  #shopify-pc__banner .shopify-pc__banner__dialog,
+  #shopify-pc__prefs .shopify-pc__prefs__dialog {
+    max-height: calc(100dvh - 24px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+
+  #shopify-pc__banner .shopify-pc__banner__btns,
+  #shopify-pc__prefs .shopify-pc__prefs__actions {
+    position: relative;
+    z-index: 1;
+  }
+
+  @supports not (height: 100dvh) {
+    #shopify-pc__banner .shopify-pc__banner__dialog,
+    #shopify-pc__prefs .shopify-pc__prefs__dialog {
+      max-height: calc(100vh - 24px);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-pc__banner .shopify-pc__banner__dialog,
+    #shopify-pc__prefs .shopify-pc__prefs__dialog {
+      max-height: calc(100dvh - 16px);
+      padding-bottom: calc(24px + env(safe-area-inset-bottom));
+    }
+  }
+</style>
