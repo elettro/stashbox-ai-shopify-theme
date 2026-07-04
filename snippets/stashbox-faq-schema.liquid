@@ -19,26 +19,100 @@
 
 {%- if stashbox_faq_source != blank -%}
   {%- capture stashbox_faq_entities -%}
-    {%- for stashbox_index in (1..5) -%}
-      {%- assign stashbox_question_key = 'faq_' | append: stashbox_index | append: '_question' -%}
-      {%- assign stashbox_answer_key = 'faq_' | append: stashbox_index | append: '_answer' -%}
-      {%- assign stashbox_question = stashbox_faq_source.metafields.custom[stashbox_question_key] -%}
-      {%- assign stashbox_answer = stashbox_faq_source.metafields.custom[stashbox_answer_key] -%}
-      {%- assign stashbox_question_text = stashbox_question | metafield_text | strip_html | strip -%}
-      {%- assign stashbox_answer_text = stashbox_answer | metafield_text | strip_html | strip -%}
-      {%- if stashbox_question_text != blank and stashbox_answer_text != blank -%}
-        {%- if stashbox_has_faq -%},{%- endif -%}
-        {
-          "@type": "Question",
-          "name": {{ stashbox_question_text | json }},
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": {{ stashbox_answer_text | json }}
-          }
+    {%- liquid
+      assign stashbox_question = stashbox_faq_source.metafields.custom.faq_1_question
+      assign stashbox_answer = stashbox_faq_source.metafields.custom.faq_1_answer
+      assign stashbox_question_text = stashbox_question | metafield_text | strip_html | strip
+      assign stashbox_answer_text = stashbox_answer | metafield_text | strip_html | strip
+    -%}
+    {%- if stashbox_question_text != blank and stashbox_answer_text != blank -%}
+      {%- if stashbox_has_faq -%},{%- endif -%}
+      {
+        "@type": "Question",
+        "name": {{ stashbox_question_text | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ stashbox_answer_text | json }}
         }
-        {%- assign stashbox_has_faq = true -%}
-      {%- endif -%}
-    {%- endfor -%}
+      }
+      {%- assign stashbox_has_faq = true -%}
+    {%- endif -%}
+
+    {%- liquid
+      assign stashbox_question = stashbox_faq_source.metafields.custom.faq_2_question
+      assign stashbox_answer = stashbox_faq_source.metafields.custom.faq_2_answer
+      assign stashbox_question_text = stashbox_question | metafield_text | strip_html | strip
+      assign stashbox_answer_text = stashbox_answer | metafield_text | strip_html | strip
+    -%}
+    {%- if stashbox_question_text != blank and stashbox_answer_text != blank -%}
+      {%- if stashbox_has_faq -%},{%- endif -%}
+      {
+        "@type": "Question",
+        "name": {{ stashbox_question_text | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ stashbox_answer_text | json }}
+        }
+      }
+      {%- assign stashbox_has_faq = true -%}
+    {%- endif -%}
+
+    {%- liquid
+      assign stashbox_question = stashbox_faq_source.metafields.custom.faq_3_question
+      assign stashbox_answer = stashbox_faq_source.metafields.custom.faq_3_answer
+      assign stashbox_question_text = stashbox_question | metafield_text | strip_html | strip
+      assign stashbox_answer_text = stashbox_answer | metafield_text | strip_html | strip
+    -%}
+    {%- if stashbox_question_text != blank and stashbox_answer_text != blank -%}
+      {%- if stashbox_has_faq -%},{%- endif -%}
+      {
+        "@type": "Question",
+        "name": {{ stashbox_question_text | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ stashbox_answer_text | json }}
+        }
+      }
+      {%- assign stashbox_has_faq = true -%}
+    {%- endif -%}
+
+    {%- liquid
+      assign stashbox_question = stashbox_faq_source.metafields.custom.faq_4_question
+      assign stashbox_answer = stashbox_faq_source.metafields.custom.faq_4_answer
+      assign stashbox_question_text = stashbox_question | metafield_text | strip_html | strip
+      assign stashbox_answer_text = stashbox_answer | metafield_text | strip_html | strip
+    -%}
+    {%- if stashbox_question_text != blank and stashbox_answer_text != blank -%}
+      {%- if stashbox_has_faq -%},{%- endif -%}
+      {
+        "@type": "Question",
+        "name": {{ stashbox_question_text | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ stashbox_answer_text | json }}
+        }
+      }
+      {%- assign stashbox_has_faq = true -%}
+    {%- endif -%}
+
+    {%- liquid
+      assign stashbox_question = stashbox_faq_source.metafields.custom.faq_5_question
+      assign stashbox_answer = stashbox_faq_source.metafields.custom.faq_5_answer
+      assign stashbox_question_text = stashbox_question | metafield_text | strip_html | strip
+      assign stashbox_answer_text = stashbox_answer | metafield_text | strip_html | strip
+    -%}
+    {%- if stashbox_question_text != blank and stashbox_answer_text != blank -%}
+      {%- if stashbox_has_faq -%},{%- endif -%}
+      {
+        "@type": "Question",
+        "name": {{ stashbox_question_text | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ stashbox_answer_text | json }}
+        }
+      }
+      {%- assign stashbox_has_faq = true -%}
+    {%- endif -%}
   {%- endcapture -%}
 
   {%- if stashbox_has_faq -%}
