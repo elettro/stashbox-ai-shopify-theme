@@ -1,0 +1,79 @@
+{% comment %}
+  DEV ONLY TEST BANNER - REMOVE BEFORE PRODUCTION LAUNCH
+{% endcomment %}
+<div id="stashbox-dev-banner" class="stashbox-dev-banner" role="status">
+  <style>
+    .stashbox-dev-banner {
+      align-items: center;
+      background: #111827;
+      color: #ffffff;
+      display: flex;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      justify-content: center;
+      letter-spacing: 0.08em;
+      line-height: 1.4;
+      min-height: 40px;
+      padding: 8px 48px;
+      position: relative;
+      text-align: center;
+      text-transform: uppercase;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .stashbox-dev-banner__close {
+      align-items: center;
+      appearance: none;
+      background: transparent;
+      border: 0;
+      color: inherit;
+      cursor: pointer;
+      display: flex;
+      font: inherit;
+      height: 40px;
+      justify-content: center;
+      padding: 0;
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+    }
+
+    .stashbox-dev-banner__close:hover,
+    .stashbox-dev-banner__close:focus-visible {
+      background: rgba(255, 255, 255, 0.16);
+      outline: 2px solid currentColor;
+      outline-offset: -4px;
+    }
+  </style>
+
+  <span class="stashbox-dev-banner__message">STASHBOX.AI DEV TEMPLATE ONLY - NOT LIVE</span>
+  <button class="stashbox-dev-banner__close" type="button" aria-label="Close dev notice">×</button>
+
+  <script>
+    (function () {
+      var banner = document.getElementById('stashbox-dev-banner');
+      var closeButton = banner ? banner.querySelector('.stashbox-dev-banner__close') : null;
+      var storageKey = 'stashbox-dev-banner-dismissed';
+
+      if (!banner || !closeButton) {
+        return;
+      }
+
+      if (window.localStorage && window.localStorage.getItem(storageKey) === 'true') {
+        banner.hidden = true;
+        return;
+      }
+
+      closeButton.addEventListener('click', function () {
+        banner.hidden = true;
+        if (window.localStorage) {
+          window.localStorage.setItem(storageKey, 'true');
+        }
+      });
+    })();
+  </script>
+</div>
