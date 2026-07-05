@@ -95,12 +95,29 @@
       outline-offset: 0.3rem;
     }
 
+    .stashbox-related-collections__media {
+      display: flex;
+      width: 100%;
+      aspect-ratio: 11 / 8;
+      align-items: center;
+      justify-content: center;
+      background: #f7f7f7;
+    }
+
     .stashbox-related-collections__image {
       display: block;
       width: 100%;
-      aspect-ratio: 11 / 8;
-      object-fit: cover;
-      background: rgba(var(--color-foreground), 0.06);
+      height: 100%;
+      object-fit: contain;
+      background: #f7f7f7;
+    }
+
+    .stashbox-related-collections__placeholder {
+      padding: 1rem;
+      color: rgba(var(--color-foreground), 0.62);
+      font-size: 1.2rem;
+      line-height: 1.35;
+      text-align: center;
     }
 
     .stashbox-related-collections__content {
@@ -167,20 +184,26 @@
           and stashbox_is_duplicate == false
         -%}
           {%- assign stashbox_rendered_handles = stashbox_rendered_handles | append: stashbox_related_handle | append: '|' -%}
-          {%- assign stashbox_related_image = stashbox_related_collection.featured_image | default: stashbox_related_collection.image -%}
+          {%- assign stashbox_related_image = stashbox_related_collection.image | default: stashbox_related_collection.featured_image -%}
 
           <li class="stashbox-related-collections__item">
             <a class="stashbox-related-collections__card" href="{{ stashbox_related_collection.url }}">
-              {%- if stashbox_related_image != blank -%}
-                <img
-                  class="stashbox-related-collections__image"
-                  src="{{ stashbox_related_image | image_url: width: 220, height: 160, crop: center }}"
-                  alt="{{ stashbox_related_collection.title | append: ' collection at STASHBOX.AI' | escape }}"
-                  width="220"
-                  height="160"
-                  loading="lazy"
-                >
-              {%- endif -%}
+              <span class="stashbox-related-collections__media">
+                {%- if stashbox_related_image != blank -%}
+                  <img
+                    class="stashbox-related-collections__image"
+                    src="{{ stashbox_related_image | image_url: width: 440 }}"
+                    alt="{{ stashbox_related_collection.title | append: ' collection at STASHBOX.AI' | escape }}"
+                    width="440"
+                    height="320"
+                    loading="lazy"
+                  >
+                {%- else -%}
+                  <span class="stashbox-related-collections__placeholder" aria-hidden="true">
+                    Collection image coming soon
+                  </span>
+                {%- endif -%}
+              </span>
               <span class="stashbox-related-collections__content">
                 <span class="stashbox-related-collections__title">{{ stashbox_related_title | escape }}</span>
                 {%- if stashbox_related_label != blank -%}
