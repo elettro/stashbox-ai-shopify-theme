@@ -1,0 +1,117 @@
+{% comment %}
+  Visible internal links between related STASHBOX.AI collections.
+  Renders only on collection pages and intentionally outputs no structured data.
+{% endcomment %}
+
+{%- if request.page_type == 'collection' and collection -%}
+  {%- capture stashbox_related_collections -%}
+    {%- case collection.handle -%}
+      {%- when 'reggaeland' -%}
+        stashbox::Stashbox Music|the-ras-box::The Ras Box|tropical::Tropical|music::Music|tahiticora::Tahiti Cora|psychedelic::Psychedelic
+      {%- when 'guitar-girls' -%}
+        guitars::Guitars|music::Music|psychedelic::Psychedelic|stashbox::Stashbox Music|shirts::Shirts|pint-glasses::Pint Glasses
+      {%- when 'music' -%}
+        stashbox::Stashbox Music|reggaeland::Reggae.Land|guitars::Guitars|guitar-girls::Guitar Girls|the-ras-box::The Ras Box|tahiticora::Tahiti Cora|psychedelic::Psychedelic
+      {%- when 'psychedelic' -%}
+        music::Music|reggaeland::Reggae.Land|the-ras-box::The Ras Box|characters::Characters|tropical::Tropical|shirts::Shirts|home-decor::Home Decor
+      {%- when 'stashbox' -%}
+        music::Music|reggaeland::Reggae.Land|the-ras-box::The Ras Box|tahiticora::Tahiti Cora|guitars::Guitars|psychedelic::Psychedelic
+      {%- when 'the-ras-box' -%}
+        reggaeland::Reggae.Land|stashbox::Stashbox Music|music::Music|tropical::Tropical|psychedelic::Psychedelic|shirts::Shirts
+      {%- when 'tahiticora' -%}
+        tropical::Tropical|music::Music|reggaeland::Reggae.Land|stashbox::Stashbox Music|shirts::Shirts|pint-glasses::Pint Glasses
+      {%- when 'tropical' -%}
+        reggaeland::Reggae.Land|tahiticora::Tahiti Cora|miami-style::Miami Style|stashbox::Stashbox Music|shirts::Shirts|home-decor::Home Decor
+      {%- when 'shirts' -%}
+        stashbox::Stashbox Music|reggaeland::Reggae.Land|guitar-girls::Guitar Girls|the-ras-box::The Ras Box|psychedelic::Psychedelic|tropical::Tropical
+      {%- when 'pint-glasses' -%}
+        stashbox::Stashbox Music|reggaeland::Reggae.Land|tropical::Tropical|guitars::Guitars|music::Music|gifts-for-dads::Gifts For Dads
+      {%- when 'home-decor' -%}
+        psychedelic::Psychedelic|tropical::Tropical|waves::Waves|music::Music|characters::Characters|stashbox::Stashbox Music
+      {%- when 'kids' -%}
+        characters::Characters|music::Music|shirts::Shirts|soccer::Soccer|butterflies::Butterflies|stashbox::Stashbox Music
+      {%- else -%}
+        stashbox::Stashbox Music|music::Music|reggaeland::Reggae.Land|psychedelic::Psychedelic|tropical::Tropical|shirts::Shirts
+    {%- endcase -%}
+  {%- endcapture -%}
+
+  {%- assign stashbox_related_links = stashbox_related_collections | strip | split: '|' -%}
+
+  {%- style -%}
+    .stashbox-related-collections {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      border: 0.1rem solid rgba(var(--color-foreground), 0.12);
+      border-radius: 1.2rem;
+      background: rgba(var(--color-foreground), 0.03);
+    }
+
+    .stashbox-related-collections__heading {
+      margin: 0 0 1rem;
+      font-size: clamp(1.8rem, 2vw, 2.4rem);
+      line-height: 1.25;
+    }
+
+    .stashbox-related-collections__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .stashbox-related-collections__link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 4rem;
+      padding: 0.8rem 1.4rem;
+      border: 0.1rem solid rgba(var(--color-foreground), 0.2);
+      border-radius: 999px;
+      color: rgb(var(--color-foreground));
+      background: rgb(var(--color-background));
+      text-decoration: none;
+      transition: border-color var(--duration-short) ease, box-shadow var(--duration-short) ease;
+    }
+
+    .stashbox-related-collections__link:hover,
+    .stashbox-related-collections__link:focus-visible {
+      border-color: rgba(var(--color-foreground), 0.55);
+      box-shadow: 0 0 0 0.1rem rgba(var(--color-foreground), 0.2);
+      text-decoration: underline;
+      text-underline-offset: 0.3rem;
+    }
+
+    @media screen and (max-width: 749px) {
+      .stashbox-related-collections {
+        margin-top: 1.5rem;
+        padding: 1.2rem;
+      }
+
+      .stashbox-related-collections__link {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  {%- endstyle -%}
+
+  <nav class="stashbox-related-collections" aria-labelledby="stashbox-related-collections-heading">
+    <h2 class="stashbox-related-collections__heading" id="stashbox-related-collections-heading">
+      Explore Related STASHBOX.AI Collections
+    </h2>
+    <ul class="stashbox-related-collections__links">
+      {%- for stashbox_related_link in stashbox_related_links -%}
+        {%- assign stashbox_related_parts = stashbox_related_link | strip | split: '::' -%}
+        {%- assign stashbox_related_handle = stashbox_related_parts[0] | strip -%}
+        {%- assign stashbox_related_label = stashbox_related_parts[1] | strip -%}
+        {%- unless stashbox_related_handle == collection.handle -%}
+          <li class="stashbox-related-collections__item">
+            <a class="stashbox-related-collections__link" href="/collections/{{ stashbox_related_handle | escape }}">
+              {{- stashbox_related_label | escape -}}
+            </a>
+          </li>
+        {%- endunless -%}
+      {%- endfor -%}
+    </ul>
+  </nav>
+{%- endif -%}
