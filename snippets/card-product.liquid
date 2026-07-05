@@ -33,6 +33,9 @@
     if ratio == 0 or ratio == null
       assign ratio = 1
     endif
+
+    # SEO: strip Shopify recommendation query params from visible product links to reduce duplicate crawl URLs.
+    assign clean_product_url = card_product.url | split: '?' | first
   -%}
   <div class="card-wrapper product-card-wrapper underline-links-hover">
     <div
@@ -110,7 +113,7 @@
               {% endif %}
             >
               <a
-                href="{{ card_product.url }}"
+                href="{{ clean_product_url }}"
                 id="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }}"
                 class="full-unstyled-link"
                 aria-labelledby="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }} NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
@@ -147,7 +150,7 @@
             {% endif %}
           >
             <a
-              href="{{ card_product.url }}"
+              href="{{ clean_product_url }}"
               id="CardLink-{{ section_id }}-{{ card_product.id }}"
               class="full-unstyled-link"
               aria-labelledby="CardLink-{{ section_id }}-{{ card_product.id }} Badge-{{ section_id }}-{{ card_product.id }}"
