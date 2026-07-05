@@ -7,35 +7,36 @@
   {%- capture stashbox_related_collections -%}
     {%- case collection.handle -%}
       {%- when 'reggaeland' -%}
-        stashbox::Stashbox Music|the-ras-box::The Ras Box|tropical::Tropical|music::Music|tahiticora::Tahiti Cora|psychedelic::Psychedelic
+        stashbox::Stashbox Music::Official STASHBOX music merch|the-ras-box::The Ras Box::Reggae comedy and bold original merch|tropical::Tropical::Island-inspired merch and artwork|music::Music::Music-inspired graphic products|tahiticora::Tahiti Cora::Tropical artist merch|psychedelic::Psychedelic::Colorful trippy STASHBOX artwork
       {%- when 'guitar-girls' -%}
-        guitars::Guitars|music::Music|psychedelic::Psychedelic|stashbox::Stashbox Music|shirts::Shirts|pint-glasses::Pint Glasses
+        guitars::Guitars::Guitar artwork and music merch|music::Music::Music-inspired graphic products|psychedelic::Psychedelic::Bold colorful visual merch|stashbox::Stashbox Music::Official STASHBOX music merch|shirts::Shirts::Graphic T-shirts and apparel|pint-glasses::Pint Glasses::Collectible drinkware designs
       {%- when 'music' -%}
-        stashbox::Stashbox Music|reggaeland::Reggae.Land|guitars::Guitars|guitar-girls::Guitar Girls|the-ras-box::The Ras Box|tahiticora::Tahiti Cora|psychedelic::Psychedelic
+        stashbox::Stashbox Music::Official STASHBOX music merch|reggaeland::Reggae.Land::Reggae-inspired merch and tropical music culture|guitars::Guitars::Guitar artwork and player-inspired designs|guitar-girls::Guitar Girls::Women guitarist artwork and stage energy|the-ras-box::The Ras Box::Reggae comedy and bold original merch|tahiticora::Tahiti Cora::Tropical artist merch|psychedelic::Psychedelic::Colorful trippy STASHBOX artwork
       {%- when 'psychedelic' -%}
-        music::Music|reggaeland::Reggae.Land|the-ras-box::The Ras Box|characters::Characters|tropical::Tropical|shirts::Shirts|home-decor::Home Decor
+        music::Music::Music-inspired graphic products|reggaeland::Reggae.Land::Reggae-inspired merch and tropical music culture|the-ras-box::The Ras Box::Reggae comedy and bold original merch|characters::Characters::Original characters and visual art|tropical::Tropical::Island-inspired merch and artwork|shirts::Shirts::Graphic T-shirts and apparel|home-decor::Home Decor::Art-forward decor and lifestyle products
       {%- when 'stashbox' -%}
-        music::Music|reggaeland::Reggae.Land|the-ras-box::The Ras Box|tahiticora::Tahiti Cora|guitars::Guitars|psychedelic::Psychedelic
+        music::Music::Music-inspired graphic products|reggaeland::Reggae.Land::Reggae-inspired merch and tropical music culture|the-ras-box::The Ras Box::Reggae comedy and bold original merch|tahiticora::Tahiti Cora::Tropical artist merch|guitars::Guitars::Guitar artwork and player-inspired designs|psychedelic::Psychedelic::Colorful trippy STASHBOX artwork
       {%- when 'the-ras-box' -%}
-        reggaeland::Reggae.Land|stashbox::Stashbox Music|music::Music|tropical::Tropical|psychedelic::Psychedelic|shirts::Shirts
+        reggaeland::Reggae.Land::Reggae-inspired merch and tropical music culture|stashbox::Stashbox Music::Official STASHBOX music merch|music::Music::Music-inspired graphic products|tropical::Tropical::Island-inspired merch and artwork|psychedelic::Psychedelic::Colorful trippy STASHBOX artwork|shirts::Shirts::Graphic T-shirts and apparel
       {%- when 'tahiticora' -%}
-        tropical::Tropical|music::Music|reggaeland::Reggae.Land|stashbox::Stashbox Music|shirts::Shirts|pint-glasses::Pint Glasses
+        tropical::Tropical::Island-inspired merch and artwork|music::Music::Music-inspired graphic products|reggaeland::Reggae.Land::Reggae-inspired merch and tropical music culture|stashbox::Stashbox Music::Official STASHBOX music merch|shirts::Shirts::Graphic T-shirts and apparel|pint-glasses::Pint Glasses::Collectible drinkware designs
       {%- when 'tropical' -%}
-        reggaeland::Reggae.Land|tahiticora::Tahiti Cora|miami-style::Miami Style|stashbox::Stashbox Music|shirts::Shirts|home-decor::Home Decor
+        reggaeland::Reggae.Land::Reggae-inspired merch and tropical music culture|tahiticora::Tahiti Cora::Tropical artist merch|miami-style::Miami Style::Bright coastal Florida designs|stashbox::Stashbox Music::Official STASHBOX music merch|shirts::Shirts::Graphic T-shirts and apparel|home-decor::Home Decor::Art-forward decor and lifestyle products
       {%- when 'shirts' -%}
-        stashbox::Stashbox Music|reggaeland::Reggae.Land|guitar-girls::Guitar Girls|the-ras-box::The Ras Box|psychedelic::Psychedelic|tropical::Tropical
+        stashbox::Stashbox Music::Official STASHBOX music merch|reggaeland::Reggae.Land::Reggae-inspired merch and tropical music culture|guitar-girls::Guitar Girls::Women guitarist artwork and stage energy|the-ras-box::The Ras Box::Reggae comedy and bold original merch|psychedelic::Psychedelic::Colorful trippy STASHBOX artwork|tropical::Tropical::Island-inspired merch and artwork
       {%- when 'pint-glasses' -%}
-        stashbox::Stashbox Music|reggaeland::Reggae.Land|tropical::Tropical|guitars::Guitars|music::Music|gifts-for-dads::Gifts For Dads
+        stashbox::Stashbox Music::Official STASHBOX music merch|reggaeland::Reggae.Land::Reggae-inspired merch and tropical music culture|tropical::Tropical::Island-inspired merch and artwork|guitars::Guitars::Guitar artwork and player-inspired designs|music::Music::Music-inspired graphic products|gifts-for-dads::Gifts For Dads::Gift-ready STASHBOX merch
       {%- when 'home-decor' -%}
-        psychedelic::Psychedelic|tropical::Tropical|waves::Waves|music::Music|characters::Characters|stashbox::Stashbox Music
+        psychedelic::Psychedelic::Colorful trippy STASHBOX artwork|tropical::Tropical::Island-inspired merch and artwork|waves::Waves::Ocean wave art and surf-inspired designs|music::Music::Music-inspired graphic products|characters::Characters::Original characters and visual art|stashbox::Stashbox Music::Official STASHBOX music merch
       {%- when 'kids' -%}
-        characters::Characters|music::Music|shirts::Shirts|soccer::Soccer|butterflies::Butterflies|stashbox::Stashbox Music
+        characters::Characters::Original characters and visual art|music::Music::Music-inspired graphic products|shirts::Shirts::Graphic T-shirts and apparel|soccer::Soccer::Sport-inspired STASHBOX designs|butterflies::Butterflies::Colorful butterfly artwork|stashbox::Stashbox Music::Official STASHBOX music merch
       {%- else -%}
-        stashbox::Stashbox Music|music::Music|reggaeland::Reggae.Land|psychedelic::Psychedelic|tropical::Tropical|shirts::Shirts
+        stashbox::Stashbox Music::Official STASHBOX music merch|music::Music::Music-inspired graphic products|reggaeland::Reggae.Land::Reggae-inspired merch and tropical music culture|psychedelic::Psychedelic::Colorful trippy STASHBOX artwork|tropical::Tropical::Island-inspired merch and artwork|shirts::Shirts::Graphic T-shirts and apparel
     {%- endcase -%}
   {%- endcapture -%}
 
   {%- assign stashbox_related_links = stashbox_related_collections | strip | split: '|' -%}
+  {%- assign stashbox_rendered_handles = '|' -%}
 
   {%- style -%}
     .stashbox-related-collections {
@@ -47,39 +48,84 @@
     }
 
     .stashbox-related-collections__heading {
-      margin: 0 0 1rem;
+      margin: 0 0 0.6rem;
       font-size: clamp(1.8rem, 2vw, 2.4rem);
       line-height: 1.25;
     }
 
-    .stashbox-related-collections__links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
+    .stashbox-related-collections__copy {
+      max-width: 72rem;
+      margin: 0 0 1.4rem;
+      color: rgba(var(--color-foreground), 0.75);
+      font-size: 1.4rem;
+      line-height: 1.5;
+    }
+
+    .stashbox-related-collections__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+      gap: 1rem;
       margin: 0;
       padding: 0;
       list-style: none;
     }
 
-    .stashbox-related-collections__link {
-      display: inline-flex;
-      align-items: center;
-      min-height: 4rem;
-      padding: 0.8rem 1.4rem;
-      border: 0.1rem solid rgba(var(--color-foreground), 0.2);
-      border-radius: 999px;
+    .stashbox-related-collections__card {
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+      overflow: hidden;
+      border: 0.1rem solid rgba(var(--color-foreground), 0.14);
+      border-radius: 1rem;
       color: rgb(var(--color-foreground));
       background: rgb(var(--color-background));
       text-decoration: none;
-      transition: border-color var(--duration-short) ease, box-shadow var(--duration-short) ease;
+      transition: border-color var(--duration-short) ease, box-shadow var(--duration-short) ease, transform var(--duration-short) ease;
     }
 
-    .stashbox-related-collections__link:hover,
-    .stashbox-related-collections__link:focus-visible {
-      border-color: rgba(var(--color-foreground), 0.55);
-      box-shadow: 0 0 0 0.1rem rgba(var(--color-foreground), 0.2);
-      text-decoration: underline;
-      text-underline-offset: 0.3rem;
+    .stashbox-related-collections__card:hover,
+    .stashbox-related-collections__card:focus-visible {
+      border-color: rgba(var(--color-foreground), 0.45);
+      box-shadow: 0 0.6rem 1.8rem rgba(var(--color-foreground), 0.12);
+      transform: translateY(-0.1rem);
+    }
+
+    .stashbox-related-collections__card:focus-visible {
+      outline: 0.2rem solid rgba(var(--color-foreground), 0.85);
+      outline-offset: 0.3rem;
+    }
+
+    .stashbox-related-collections__image {
+      display: block;
+      width: 100%;
+      aspect-ratio: 11 / 8;
+      object-fit: cover;
+      background: rgba(var(--color-foreground), 0.06);
+    }
+
+    .stashbox-related-collections__content {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      gap: 0.35rem;
+      padding: 1rem;
+    }
+
+    .stashbox-related-collections__title {
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .stashbox-related-collections__label {
+      color: rgba(var(--color-foreground), 0.72);
+      font-size: 1.2rem;
+      line-height: 1.35;
+    }
+
+    @media screen and (min-width: 990px) {
+      .stashbox-related-collections__grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
     }
 
     @media screen and (max-width: 749px) {
@@ -88,9 +134,8 @@
         padding: 1.2rem;
       }
 
-      .stashbox-related-collections__link {
-        width: 100%;
-        justify-content: center;
+      .stashbox-related-collections__grid {
+        grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
       }
     }
   {%- endstyle -%}
@@ -99,18 +144,52 @@
     <h2 class="stashbox-related-collections__heading" id="stashbox-related-collections-heading">
       Explore Related STASHBOX.AI Collections
     </h2>
-    <ul class="stashbox-related-collections__links">
+    <p class="stashbox-related-collections__copy">
+      Discover more STASHBOX.AI merch collections connected by music, artwork, style, and original visual culture.
+    </p>
+    <ul class="stashbox-related-collections__grid">
       {%- for stashbox_related_link in stashbox_related_links -%}
         {%- assign stashbox_related_parts = stashbox_related_link | strip | split: '::' -%}
         {%- assign stashbox_related_handle = stashbox_related_parts[0] | strip -%}
-        {%- assign stashbox_related_label = stashbox_related_parts[1] | strip -%}
-        {%- unless stashbox_related_handle == collection.handle -%}
+        {%- assign stashbox_related_title = stashbox_related_parts[1] | strip -%}
+        {%- assign stashbox_related_label = stashbox_related_parts[2] | strip -%}
+        {%- assign stashbox_related_collection = collections[stashbox_related_handle] -%}
+        {%- assign stashbox_handle_token = '|' | append: stashbox_related_handle | append: '|' -%}
+
+        {%- assign stashbox_is_duplicate = false -%}
+        {%- if stashbox_rendered_handles contains stashbox_handle_token -%}
+          {%- assign stashbox_is_duplicate = true -%}
+        {%- endif -%}
+
+        {%- if stashbox_related_collection != blank
+          and stashbox_related_collection.url != blank
+          and stashbox_related_handle != collection.handle
+          and stashbox_is_duplicate == false
+        -%}
+          {%- assign stashbox_rendered_handles = stashbox_rendered_handles | append: stashbox_related_handle | append: '|' -%}
+          {%- assign stashbox_related_image = stashbox_related_collection.featured_image | default: stashbox_related_collection.image -%}
+
           <li class="stashbox-related-collections__item">
-            <a class="stashbox-related-collections__link" href="/collections/{{ stashbox_related_handle | escape }}">
-              {{- stashbox_related_label | escape -}}
+            <a class="stashbox-related-collections__card" href="{{ stashbox_related_collection.url }}">
+              {%- if stashbox_related_image != blank -%}
+                <img
+                  class="stashbox-related-collections__image"
+                  src="{{ stashbox_related_image | image_url: width: 220, height: 160, crop: center }}"
+                  alt="{{ stashbox_related_collection.title | append: ' collection at STASHBOX.AI' | escape }}"
+                  width="220"
+                  height="160"
+                  loading="lazy"
+                >
+              {%- endif -%}
+              <span class="stashbox-related-collections__content">
+                <span class="stashbox-related-collections__title">{{ stashbox_related_title | escape }}</span>
+                {%- if stashbox_related_label != blank -%}
+                  <span class="stashbox-related-collections__label">{{ stashbox_related_label | escape }}</span>
+                {%- endif -%}
+              </span>
             </a>
           </li>
-        {%- endunless -%}
+        {%- endif -%}
       {%- endfor -%}
     </ul>
   </nav>
